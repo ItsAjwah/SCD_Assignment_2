@@ -1,47 +1,62 @@
-import java.util.LinkedList;
 import java.util.Scanner;
 
+class Node<T> {
+    T data;
+    Node<T> next;
+
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
 class GenericStack<T> {
-    private LinkedList<T> stack; //stack made
-    private int Cap;
+    private Node<T> top; // top of the stack
+    private int size;
+    private int cap;
 
-    public GenericStack(int maxsize) {
-        stack = new LinkedList<>();
-        this.Cap = maxsize; //sizee=maxsize
+    public GenericStack(int capacity) {
+        this.cap = capacity;
+        this.size = 0;
+        this.top = null;
     }
 
-    // Push an item onto the stack
     public void push(T item) {
-        if (size() >= Cap) { //agr jo input aa rha uska size humri stack size se bara toh through exception
+
+        if (size() >= cap) {
             throw new GenericStackException("Stack is full. Cannot push more elements.");
-        }
-        else {
-            stack.push(item);
+        } else {
+            Node<T> newnode = new Node<>(item);
+            newnode.next = top;
+            top = newnode;
+            size++;
         }
     }
-
 
     public T pop() {
-        if (isEmpty()) { //agr stack empty hy toh through excpetion
-            throw new GenericStackException("Stack is empty,no element to pop.");
+        if (isEmpty()) {
+            throw new GenericStackException("Stack is empty, there is no element to pop.");
         }
-        return stack.pop();  //jo top pey hy usko pop kr diengy
+        T poppedValue = top.data;
+        top = top.next;
+        size--;
+        return poppedValue;
     }
-
 
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return size == 0;
     }
-
 
     public int size() {
-        return stack.size();
+
+        return size;
     }
 
-
     public void displayStack() {
-        for (T element : stack) { //element declared of T type
-            System.out.println(element);
+        Node<T> now = top; //abhi wala node
+        while (now != null) {  //agr abhi wala null ni hy
+            System.out.println(now.data);  ///abhi wale node ka data print
+            now = now.next;  //or next node pey move kerdia
         }
     }
 }
@@ -50,12 +65,12 @@ public class Q1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
         System.out.print("Enter the size of the stack: ");
-        int size_of_stack = scanner.nextInt();
+        int stack_size = scanner.nextInt();
 
-        //now genric(T type) stack will be made of size given by user
-        GenericStack<Integer> mystack = new GenericStack<>( size_of_stack);
+        GenericStack<Integer> intStack = new GenericStack<>(stack_size);
+        GenericStack<String> stringStack = new GenericStack<>(stack_size);
+        GenericStack<Float> floatStack = new GenericStack<>(stack_size);
 
         boolean do_operation = true;
 
@@ -72,35 +87,54 @@ public class Q1 {
 
             switch (choice) {
                 case 1:
-                    if (mystack.size() < size_of_stack) {
-                        System.out.print("Enter an integer to push onto the stack: ");
-                        int value = scanner.nextInt();
-                        mystack.push(value);
-                        System.out.println( value + " is Pushed into the stack.");
+                    if (intStack.size() < stack_size) {
+                        System.out.print("Enter an element to push onto the stack: ");
+                        if (scanner.hasNextInt()) {
+                            int value = scanner.nextInt();
+                            intStack.push(value);
+                            System.out.println(value + " is Pushed into the stack.");
+                        } else if (scanner.hasNextFloat()) {
+                            float value = scanner.nextFloat();
+                            floatStack.push(value);
+                            System.out.println(value + " is Pushed into the stack.");
+                        } else {
+                            String value = scanner.next();
+                            stringStack.push(value);
+                            System.out.println(value + " is Pushed into the stack.");
+                        }
                     } else {
                         System.out.println("Stack is full, Cannot push more elements.");
                     }
                     break;
                 case 2:
                     try {
-                        int poppedvalue = mystack.pop();
-                        System.out.println("Popped value is: " + poppedvalue);
+                        int poppedValue = intStack.pop();
+                        System.out.println("Popped value is: " + poppedValue);
                     } catch (GenericStackException e) {
                         System.out.println("Exception: " + e.getMessage());
                     }
                     break;
                 case 3:
-                    System.out.println("Stack is empty: " + mystack.isEmpty());
+                    System.out.println("Stacks are empty:");
+                    System.out.println("Integer Stack: " + intStack.isEmpty());
+                    System.out.println("Float Stack: " + floatStack.isEmpty());
+                    System.out.println("String Stack: " + stringStack.isEmpty());
                     break;
                 case 4:
-                    System.out.println("Size of the stack: " + mystack.size());
+                    System.out.println("Sizes of the stacks:");
+                    System.out.println("Integer Stack: " + intStack.size());
+                    System.out.println("Float Stack: " + floatStack.size());
+                    System.out.println("String Stack: " + stringStack.size());
                     break;
+
                 case 5:
                     System.out.println("Stack elements:");
-                    mystack.displayStack();
+                    intStack.displayStack();
+                    stringStack.displayStack();
+                    floatStack.displayStack();
                     break;
                 case 6:
-                    do_operation= false;
+                    do_operation = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please choose a valid operation.");
