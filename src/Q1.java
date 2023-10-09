@@ -117,21 +117,24 @@ public class Q1 {
                 case 3:
                     System.out.println("Stacks are empty:");
                     System.out.println("Integer Stack: " + intStack.isEmpty());
-                    System.out.println("Float Stack: " + floatStack.isEmpty());
-                    System.out.println("String Stack: " + stringStack.isEmpty());
+                    // System.out.println("Stack is empty: " + intStack.isEmpty());
+
+                    // System.out.println("Float Stack: " + floatStack.isEmpty());
+                   // System.out.println("String Stack: " + stringStack.isEmpty());
+
                     break;
                 case 4:
                     System.out.println("Sizes of the stacks:");
                     System.out.println("Integer Stack: " + intStack.size());
-                    System.out.println("Float Stack: " + floatStack.size());
-                    System.out.println("String Stack: " + stringStack.size());
+                    //System.out.println("Float Stack: " + floatStack.size());
+                    //System.out.println("String Stack: " + stringStack.size());
                     break;
 
                 case 5:
                     System.out.println("Stack elements:");
                     intStack.displayStack();
-                    stringStack.displayStack();
-                    floatStack.displayStack();
+                   // stringStack.displayStack();
+                   // floatStack.displayStack();
                     break;
                 case 6:
                     do_operation = false;
