@@ -16,11 +16,11 @@ public class Q2 {
 
         intcount_arr[c]++;  //jo character aya usme increse kerdia
 
-        queue.add(c);  //phr char ko q mei dal dia
+        queue.add(c);  //phr char ko queue mei dal dia
 
         //jab tk non repeating ni aa jata remove charcctres from queue
         while (!queue.isEmpty() && intcount_arr[queue.peek()] > 1) {
-            queue.poll();  // it removes and returns the element at the front of the queue.
+            queue.poll();  // it removes and returns the element at the front of the queue,which is left
         }
     }
 
