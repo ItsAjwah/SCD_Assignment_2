@@ -52,13 +52,7 @@ class GenericStack<T> {
         return size;
     }
 
-//    public void displayStack() {
-//        Node<T> now = top; //abhi wala node
-//        while (now != null) {  //agr abhi wala null ni hy
-//            System.out.println(now.data);  ///abhi wale node ka data print
-//            now = now.next;  //or next node pey move kerdia
-//        }
-//    }
+
 }
 
 public class Q1 {
@@ -80,7 +74,6 @@ public class Q1 {
             System.out.println("2. Pop");
             System.out.println("3. Check if the stack is empty");
             System.out.println("4. Get the size of the stack");
-            //System.out.println("5. Display the stack");
             System.out.println("5. Exit");
 
             int choice = scanner.nextInt();
@@ -130,12 +123,6 @@ public class Q1 {
                     //System.out.println("String Stack: " + stringStack.size());
                     break;
 
-//                case 5:
-//                    System.out.println("Stack elements:");
-//                    intStack.displayStack();
-//                   // stringStack.displayStack();
-//                   // floatStack.displayStack();
-//                    break;
                 case 5:
                     do_operation = false;
                     break;
